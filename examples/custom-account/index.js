@@ -37,8 +37,8 @@ wallet.registerAccountMessageHandler(async (origin, req) => {
 
 async function addAccount (params) {
   console.log('params', params)
-  let httpProvider = new ethers.providers.JsonRpcProvider();
-  let ethersWallet = new ethers.Wallet(await wallet.getAppKey(), httpProvider);
+  let provider = new ethers.providers.Web3Provider(wallet);
+  let ethersWallet = new ethers.Wallet(await wallet.getAppKey(), provider);
   console.log('ethersWallet.address', ethersWallet.address)
   console.log('ethersWallet.getBalance()', await ethersWallet.getBalance())
   const account = await deployContract(ethersWallet)
